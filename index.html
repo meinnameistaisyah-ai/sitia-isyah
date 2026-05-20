@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuliner Jerman — Warisan Rasa dari Tanah Bavaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0d0d0d;
+      --cream: #f5f0e8;
+      --gold: #c8973a;
+      --rust: #9e3b20;
+      --warm-gray: #8a8070;
+      --dark-brown: #2a1f14;
+      --section-bg: #1a1410;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+      background: var(--dark-brown);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,151,58,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 100%, rgba(158,59,32,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      max-width: 900px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.7);
+      max-width: 560px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+
+    .hero-divider {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s forwards;
+    }
+
+    .hero-divider span {
+      display: block;
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .hero-divider p {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .scroll-hint p { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-gray); }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 1.8s infinite;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      background: var(--section-bg);
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+
+    .intro-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .intro p {
+      color: rgba(245,240,232,0.75);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.85;
+    }
+
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 2.5rem auto;
+      opacity: 0.6;
+    }
+
+    /* ── FOOD GRID ── */
+    .foods {
+      padding: 6rem 2rem;
+      background: var(--black);
+    }
+
+    .foods-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .foods-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      position: relative;
+      background: var(--section-bg);
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover { transform: scale(1.015); z-index: 2; }
+
+    .card-emoji {
+      font-size: 4rem;
+      display: block;
+      padding: 3rem 2.5rem 1rem;
+      line-height: 1;
+    }
+
+    .card-body { padding: 0 2.5rem 3rem; }
+
+    .card-number {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-origin {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: rgba(245,240,232,0.65);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid rgba(200,151,58,0.4);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--rust));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover::after { transform: scaleX(1); }
+
+    /* ── FEATURED ── */
+    .featured {
+      background: var(--dark-brown);
+      padding: 7rem 2rem;
+    }
+
+    .featured-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .featured-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-text h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .featured-text p {
+      color: rgba(245,240,232,0.7);
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-visual {
+      background: var(--section-bg);
+      border: 1px solid rgba(200,151,58,0.2);
+      padding: 3rem;
+      position: relative;
+    }
+
+    .featured-visual::before {
+      content: '🍺';
+      font-size: 8rem;
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+
+    .beer-facts h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .fact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+      font-size: 0.9rem;
+    }
+
+    .fact-row:last-child { border-bottom: none; }
+
+    .fact-row span:first-child { color: var(--warm-gray); font-size: 0.82rem; letter-spacing: 0.1em; }
+    .fact-row span:last-child { color: var(--cream); font-weight: 600; }
+
+    /* ── TIPS ── */
+    .tips {
+      background: var(--section-bg);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .tips h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 3.5rem;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tip-item {
+      padding: 2.5rem 1.5rem;
+      background: rgba(245,240,232,0.03);
+      border: 1px solid rgba(245,240,232,0.08);
+      transition: border-color 0.3s;
+    }
+
+    .tip-item:hover { border-color: rgba(200,151,58,0.4); }
+
+    .tip-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+    .tip-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+      color: var(--cream);
+    }
+
+    .tip-item p {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark-brown);
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(200,151,58,0.2);
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.08em;
+    }
+
+    footer .flag { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50%       { opacity: 1; transform: scaleY(1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .featured-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Kuliner Dunia — Edisi Jerman</p>
+  <h1>Warisan <em>Rasa</em><br>dari Tanah Jerman</h1>
+  <p class="hero-sub">Dari Bavaria hingga Berlin — menjelajahi kekayaan kuliner negeri bir dan sosis yang tak tertandingi.</p>
+  <div class="hero-divider">
+    <span></span>
+    <p>Seit Jahrhunderten</p>
+    <span></span>
+  </div>
+  <div class="scroll-hint">
+    <p>Gulir ke bawah</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-inner reveal">
+    <p class="section-tag">Sekilas Tentang Kuliner Jerman</p>
+    <h2>Lebih dari Sekadar Sosis dan Bir</h2>
+    <div class="gold-line"></div>
+    <p>
+      Masakan Jerman mencerminkan keragaman budaya dan iklim di tiap wilayahnya. Dari hidangan berat ala Bavaria yang penuh lemak dan kelezatan, hingga hidangan ringan dan segar dari wilayah pesisir utara — kuliner Jerman menawarkan spektrum rasa yang jauh lebih kaya dari yang banyak orang bayangkan.
+    </p>
+    <div class="gold-line"></div>
+    <p>
+      Tradisi memasak Jerman berakar kuat pada bahan-bahan lokal: babi, kentang, kol, rempah, dan tentu saja — bir. Setiap suapan adalah perjalanan melintasi sejarah dan identitas masyarakatnya.
+    </p>
+  </div>
+</section>
+
+<!-- FOOD CARDS -->
+<section class="foods">
+  <div class="foods-header reveal">
+    <p class="section-tag">Daftar Kuliner Khas</p>
+    <h2>10 Makanan Ikonik Jerman</h2>
+  </div>
+  <div class="grid">
+
+    <div class="card reveal">
+      <span class="card-emoji">🌭</span>
+      <div class="card-body">
+        <p class="card-number">01</p>
+        <h3>Bratwurst</h3>
+        <p class="card-origin">Bavaria & Seluruh Jerman</p>
+        <p>Sosis panggang atau goreng yang terbuat dari daging babi, sapi, atau campuran keduanya dengan bumbu khas seperti jahe, pala, dan marjoram. Disajikan dengan mustard dan roti brötchen, Bratwurst adalah jiwa kuliner Jerman yang sesungguhnya.</p>
+        <span class="card-tag">Daging & Sosis</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🥩</span>
+      <div class="card-body">
+        <p class="card-number">02</p>
+        <h3>Schnitzel</h3>
+        <p class="card-origin">Austria & Jerman Selatan</p>
+        <p>Irisan daging tipis yang dibalut tepung roti lalu digoreng hingga keemasan. Wiener Schnitzel asli menggunakan daging sapi muda (veal), sementara Jägerschnitzel disajikan dengan saus jamur yang gurih dan kaya. Hidangan ini menjadi favorit di seluruh Eropa berbahasa Jerman.</p>
+        <span class="card-tag">Daging Goreng</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🥔</span>
+      <div class="card-body">
+        <p class="card-number">03</p>
+        <h3>Kartoffelklöße</h3>
+        <p class="card-origin">Thuringia & Bavria</p>
+        <p>Bola-bola kentang kukus yang besar dan kenyal, terbuat dari campuran kentang mentah dan matang. Biasa disajikan sebagai pendamping daging panggang atau unggas, dan disiram saus yang gurih. Teksturnya unik — luar lembut, dalam sedikit padat.</p>
+        <span class="card-tag">Hidangan Sampingan</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🥣</span>
+      <div class="card-body">
+        <p class="card-number">04</p>
+        <h3>Sauerbraten</h3>
+        <p class="card-origin">Rhineland & Westphalia</p>
+        <p>Daging sapi yang dimarinasi selama beberapa hari dalam campuran cuka, anggur merah, dan rempah-rempah, lalu dimasak perlahan hingga sangat empuk. Disajikan dengan saus yang sedikit asam-manis dan klöße, ini adalah salah satu hidangan paling berkarakter di Jerman.</p>
+        <span class="card-tag">Daging Panggang</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🥙</span>
+      <div class="card-body">
+        <p class="card-number">05</p>
+        <h3>Currywurst</h3>
+        <p class="card-origin">Berlin & Hamburg</p>
+        <p>Sosis babi goreng yang dipotong-potong lalu disiram saus tomat berbumbu kari. Lahir di Berlin pasca-Perang Dunia II, kini menjadi street food paling ikonik di Jerman dengan lebih dari 800 juta porsi dikonsumsi setiap tahunnya. Sederhana, tapi adiktif.</p>
+        <span class="card-tag">Street Food</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🥗</span>
+      <div class="card-body">
+        <p class="card-number">06</p>
+        <h3>Sauerkraut</h3>
+        <p class="card-origin">Seluruh Jerman</p>
+        <p>Kubis yang difermentasi dengan garam selama berminggu-minggu hingga menghasilkan rasa asam yang khas. Kaya akan probiotik dan vitamin C, sauerkraut bukan sekadar lalapan — ia adalah pelengkap wajib aneka hidangan daging Jerman dan simbol kuliner nasional.</p>
+        <span class="card-tag">Fermentasi</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🍞</span>
+      <div class="card-body">
+        <p class="card-number">07</p>
+        <h3>Pretzel (Brezel)</h3>
+        <p class="card-origin">Bavaria & Baden-Württemberg</p>
+        <p>Roti berbentuk simpul yang direndam dalam larutan soda sebelum dipanggang, menghasilkan kulit luar cokelat mengkilap dan remah dalam yang lembut. Ditaburi butiran garam kasar, pretzel adalah teman setia bir di Oktoberfest dan kudapan sehari-hari warga Bavaria.</p>
+        <span class="card-tag">Roti & Panggang</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🍮</span>
+      <div class="card-body">
+        <p class="card-number">08</p>
+        <h3>Black Forest Cake</h3>
+        <p class="card-origin">Baden-Württemberg</p>
+        <p>Schwarzwälderkirschtorte — kue berlapis cokelat yang diselingi krim kocok segar dan ceri hitam, lalu disiram kirsch (minuman keras ceri). Asal-usulnya dari Pegunungan Black Forest, kini menjadi salah satu kue paling terkenal di dunia.</p>
+        <span class="card-tag">Dessert & Kue</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🍖</span>
+      <div class="card-body">
+        <p class="card-number">09</p>
+        <h3>Eisbein</h3>
+        <p class="card-origin">Berlin & Jerman Utara</p>
+        <p>Paha babi yang direbus perlahan hingga dagingnya lepas dari tulang — lunak, gempal, dan penuh rasa. Di Berlin disajikan dengan sauerkraut dan kentang pure, sementara di Bavaria versi panggang (Schweinshaxe) memiliki kulit yang crispy memukau.</p>
+        <span class="card-tag">Daging Rebus</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <span class="card-emoji">🫕</span>
+      <div class="card-body">
+        <p class="card-number">10</p>
+        <h3>Eintopf</h3>
+        <p class="card-origin">Seluruh Jerman</p>
+        <p>Secara harfiah berarti "satu panci" — sup atau rebusan tebal yang berisi aneka sayuran, daging, dan kadang sosis. Setiap keluarga dan wilayah memiliki versi khasnya sendiri. Hidangan ini adalah simbol kehangatan rumah dan kesederhanaan masakan Jerman.</p>
+        <span class="card-tag">Sup & Rebusan</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED: BEER CULTURE -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-text reveal">
+      <p class="section-tag">Budaya Bir Jerman</p>
+      <h2>Reinheitsgebot — <em>Hukum Kemurnian</em> Bir</h2>
+      <p>Sejak tahun 1516, Jerman memberlakukan Reinheitsgebot — regulasi pembuatan bir tertua di dunia yang menetapkan bahwa bir hanya boleh dibuat dari air, malt barley, dan hop. Ini bukan sekadar aturan, melainkan filosofi: kualitas di atas segalanya.</p>
+      <p>Bir dan makanan di Jerman tak dapat dipisahkan. Setiap jenis bir — Lager, Weizen, Dunkel, Bock — memiliki pasangan hidangan tersendiri. Oktoberfest di Munich setiap tahun mengundang jutaan pengunjung untuk merayakan tradisi ini.</p>
+      <p>Jerman kini memiliki lebih dari 1.300 brewery yang memproduksi lebih dari 5.000 jenis bir berbeda. Sebuah warisan yang dijaga ketat dengan kebanggaan nasional.</p>
+    </div>
+    <div class="featured-visual reveal">
+      <div class="beer-facts">
+        <h4>Fakta Bir Jerman</h4>
+        <div class="fact-row">
+          <span>Jumlah Brewery</span>
+          <span>1.300+</span>
+        </div>
+        <div class="fact-row">
+          <span>Jenis Bir</span>
+          <span>5.000+</span>
+        </div>
+        <div class="fact-row">
+          <span>Bir Tertua</span>
+          <span>Weihenstephan (1040)</span>
+        </div>
+        <div class="fact-row">
+          <span>Reinheitsgebot</span>
+          <span>Sejak 1516</span>
+        </div>
+        <div class="fact-row">
+          <span>Konsumsi / tahun</span>
+          <span>~7,5 miliar liter</span>
+        </div>
+        <div class="fact-row">
+          <span>Festival Terbesar</span>
+          <span>Oktoberfest Munich</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips">
+  <div class="reveal">
+    <p class="section-tag">Panduan Wisata Kuliner</p>
+    <h2>Tips Menikmati Kuliner Jerman</h2>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-item reveal">
+      <span class="tip-icon">🕛</span>
+      <h4>Makan Siang adalah Raja</h4>
+      <p>Di Jerman, makan siang (Mittagessen) adalah hidangan utama terbesar hari itu. Malam hari biasanya lebih ringan — roti, keju, dan cold cuts.</p>
+    </div>
+    <div class="tip-item reveal">
+      <span class="tip-icon">🗺️</span>
+      <h4>Eksplorasi per Wilayah</h4>
+      <p>Tiap negara bagian punya kekhas­an sendiri. Bavaria, Swabia, Rhineland, dan Hamburg menawarkan cita rasa yang sangat berbeda.</p>
+    </div>
+    <div class="tip-item reveal">
+      <span class="tip-icon">🏪</span>
+      <h4>Coba Pasar Mingguan</h4>
+      <p>Wochenmarkt (pasar mingguan) adalah tempat terbaik menemukan produk lokal segar, keju artisan, dan street food otentik langsung dari produsennya.</p>
+    </div>
+    <div class="tip-item reveal">
+      <span class="tip-icon">🍺</span>
+      <h4>Bierhaus & Biergarten</h4>
+      <p>Makan di Biergarten (taman bir) adalah pengalaman sosial khas Jerman. Bawa makanan sendiri atau beli di tempat — duduk bersama orang asing adalah hal biasa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="flag">🇩🇪</span>
+  <p>Guten Appetit! &nbsp;·&nbsp; Selamat Menikmati Kuliner Jerman</p>
+  <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.4;">Konten edukatif untuk keperluan web &amp; pembelajaran kuliner dunia</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
